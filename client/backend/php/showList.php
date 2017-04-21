@@ -4,8 +4,6 @@
 	$type=$_GET['type'];
 	$sql="select * from ".$type;
     $result=$conn->query($sql);
-
-
 	$arr = [];
 	while($row = mysqli_fetch_assoc($result)) {
 		$x['id']=(int)$row['id'];
