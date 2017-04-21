@@ -4,8 +4,11 @@
 var myController=angular.module('myController',[]);
 myController.controller('mliController',['$scope','$http','$routeParams',
     function ($scope,$http,$routeParams) {
+        $scope.orderProp='-time';
         $scope.type=$routeParams.type;
-        // $scope.orderProp='-time';
+        $scope.getDetail=function ($index) {
+              window.open($scope.articles[$index].src);
+        };
         $http({
             method:'get',
             url:'client/backend/php/showList.php',
