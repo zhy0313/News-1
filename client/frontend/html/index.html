@@ -1,0 +1,12 @@
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h3 class="panel-title">全站十大</h3>
+    </div>
+    <div class="panel-body">
+        <ul>
+            <li ng-repeat="hot in hots"><span class="rankDigit">{{$index+1}}</span>&nbsp;[{{hot.type}}]&nbsp;{{hot.title}}
+                &nbsp;&nbsp;<span class="badge">{{hot.count}}</span>
+            </li>
+        </ul>
+    </div>
+</div>

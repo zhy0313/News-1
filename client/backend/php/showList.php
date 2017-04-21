@@ -11,6 +11,7 @@
 		$x['author']=$row['author'];
 		$x['time']=$row['time'];
 		$x['src']=$row['src'];
+		$x['count']=$row['count'];
 		$arr[] = $x;
 	}
 	echo json_encode($arr, JSON_UNESCAPED_UNICODE);

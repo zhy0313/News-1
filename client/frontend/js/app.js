@@ -6,8 +6,8 @@ myApp.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
         when('/index',{
-            // templateUrl:'client/frontend/html/mli.html',
-            controller:'mliController'
+            templateUrl:'client/frontend/html/index.html',
+            controller:'indexController'
         }).
         when('/:type',{
             templateUrl:'client/frontend/html/type.html',
