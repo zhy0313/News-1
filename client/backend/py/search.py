@@ -1,7 +1,7 @@
 import feedparser
 import pymysql
 import datetime as dt
-def search(rss_url,author,type):
+def search(rss_url,webSite,type):
     # 获得订阅
     feeds = feedparser.parse(rss_url)
     # 连接数据库
@@ -12,17 +12,19 @@ def search(rss_url,author,type):
         # print(feed)
         src=feed.link
         newsTime = feed.published
-        if author=='新浪新闻':
+        author=webSite
+        if webSite=='新浪新闻':
             src=src[src.index('=http')+1:]
             GMT_FORMAT = '%a, %d %b %Y %H:%M:%S GMT'
-            newsTime=dt.datetime.strptime(newsTime,GMT_FORMAT)
-        if author=='百度新闻':
+            newsTime=dt.datetime.strptime(newsTime,GMT_FORMAT)+dt.timedelta(hours=8)
+        if webSite=='百度新闻':
             BAI_FORMAT='%Y-%m-%dT%H:%M:%S.000Z'
-            newsTime=dt.datetime.strptime(newsTime,BAI_FORMAT)
+            newsTime=dt.datetime.strptime(newsTime,BAI_FORMAT)+dt.timedelta(hours=8)
+            author = feed.author
 
         title=feed.title
         print(title,src,newsTime,author)
-        cursor.execute("INSERT INTO %s"%type+"(title,src,time,author) VALUES ('{0}','{1}','{2}','{3}')".format(title,src,newsTime,author))
+        # cursor.execute("INSERT INTO %s"%type+"(title,src,time,author) VALUES ('{0}','{1}','{2}','{3}')".format(title,src,newsTime,author))
     conn.commit()
     cursor.close()
     conn.close()

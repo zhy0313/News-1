@@ -6,9 +6,6 @@ myController.controller('mliController',['$scope','$http','$routeParams',
     function ($scope,$http,$routeParams) {
         $scope.orderProp='-time';
         $scope.type=$routeParams.type;
-        $scope.getDetail=function ($index) {
-              window.open($scope.articles[$index].src);
-        };
         $http({
             method:'get',
             url:'client/backend/php/showList.php',
@@ -17,5 +14,10 @@ myController.controller('mliController',['$scope','$http','$routeParams',
             $scope.articles=data;
         }).error(function(data){
             console.log("error messgae:"+data)
-        })
+        });
+        $scope.getDetail=function(key) {
+            console.log(key);
+            console.log($scope.articles[key]);
+            window.open($scope.articles[key].src);
+        };
 }]);
