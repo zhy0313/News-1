@@ -1,0 +1,13 @@
+    <article>
+        <div ng-repeat="article in articles">
+            <img ng-src="{{article.imgUrl}}">
+            <div class="panel panel-primary" >
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{article.title}}</h3>
+                </div>
+                <div class="panel-body">
+                    {{article.author}}&nbsp;•&nbsp;{{article.time}}
+                </div>
+            </div>
+        </div>
+    </article>

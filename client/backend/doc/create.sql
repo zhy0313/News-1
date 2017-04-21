@@ -20,12 +20,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `article` (
-      `id` int(10) unsigned zerofill NOT NULL COMMENT '新闻id',
-      `title` varchar(50) DEFAULT NULL COMMENT '新闻标题',
-      `content` varchar(10000) DEFAULT NULL COMMENT '新闻内容',
-      `time` date DEFAULT NULL COMMENT '新闻发布时间',
-      `source` varchar(20) DEFAULT NULL COMMENT '新闻来源的网站'
-
+  `id` int(10) unsigned zerofill NOT NULL COMMENT '新闻id',
+  `title` varchar(50) DEFAULT NULL COMMENT '新闻标题',
+  `content` varchar(10000) DEFAULT NULL COMMENT '新闻内容',
+  `time` datetime DEFAULT NULL COMMENT '新闻发布时间',
+  `source` varchar(20) DEFAULT NULL COMMENT '新闻来源的网站'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -35,7 +34,7 @@ CREATE TABLE `article` (
 --
 -- Indexes for table `article`
 --
-ALTER TABLE `article`
+ALTER TABLE netease
   ADD PRIMARY KEY (`id`);
 
 --
@@ -45,5 +44,5 @@ ALTER TABLE `article`
 --
 -- AUTO_INCREMENT for table `article`
 --
-ALTER TABLE `article`
+ALTER TABLE netease
   MODIFY `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT COMMENT '新闻id';
