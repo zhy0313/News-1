@@ -2,33 +2,42 @@
 include 'connect.php';
 error_reporting(E_ERROR|E_WARNING);
 
-$types=['mli','sci'];
+$types=['mli','sci','hot','gam','ent','edu'];
 $hots = [];
 $sort=[];
 $arr=array(
-    'mli'=>array(),
-    'sci'=>array(),
-    'hots'=>array()
+    'mlis'=>array(),
+    'scis'=>array(),
+    'hots'=>array(),
+    'gams'=>array(),
+    'ents'=>array(),
+    'edus'=>array()
 );
 foreach ($types as $type){
     $sql="select * from {$type} order by count desc limit 0,5";
     $result=$conn->query($sql);
     $i=0;
+    $tmp=[];
     while($row = mysqli_fetch_assoc($result)) {
+        $x['id']=$row['id'];
         $x['title']=$row['title'];
         $x['author']=$row['author'];
         $x['src']=$row['src'];
         $x['count']=$row['count'];
-        switch ($type){
-            case 'mli';$x['type']='军事新闻';$arr['mli'][]=$x;break;
-            case 'sci':$x['type']='科技新闻';$arr['sci'][]=$x;break;
-            default:$x['type']='其他';break;
-        }
+        $x['type']=$type;
         $i++;
         if($i<=2){
             $sort[]=$x['count'];
             $hots[] = $x;
         }
+        $tmp[]=$x;
+    }
+    switch ($type){
+        case 'mli':$arr['mlis']=$tmp;break;
+        case 'sci':$arr['scis']=$tmp;break;
+        case 'edu':$arr['edus']=$tmp;break;
+        case 'ent':$arr['ents']=$tmp;break;
+        case 'gam':$arr['gams']=$tmp;break;
     }
 }
 array_multisort($sort,SORT_DESC,$hots);
