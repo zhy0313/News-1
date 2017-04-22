@@ -17,6 +17,9 @@ def search(rss_url,webSite,type):
     conn=pymysql.connect(host='120.77.34.254',port=3306,user='root',passwd='exciting',db='news',charset="utf8")
     cursor = conn.cursor()
 
+    deadline=dt.timedelta(days=2)
+    cursor.execute('DELETE')
+
     for feed in feeds['entries']:
         # print(feed)
         src=feed.link
@@ -41,7 +44,6 @@ def search(rss_url,webSite,type):
     conn.close()
 
 
-searchContent('http://mil.news.sina.com.cn/china/2017-04-21/doc-ifyepsec0022122.shtml')
 #search("http://rss.sina.com.cn/roll/mil/hot_roll.xml",'新浪新闻','mli')
 #search("http://news.baidu.com/n?cmd=1&class=mil&tn=rss",'百度新闻','mli')
 

@@ -38,8 +38,11 @@ myController.controller('indexController',['$scope','$http',
             method: 'get',
             url:'client/backend/php/showHot.php'
         }).success(function (data) {
-            $scope.hots=data;
+            $scope.hots=data['hots'];
+            $scope.mlis=data['mli'];
+            $scope.scis=data['sci'];
         }).error(function (data) {
             console.log("error messgae:" + data)
         });
+        
 }]);

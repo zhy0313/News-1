@@ -27,3 +27,6 @@ li:nth-child(3) .rankDigit{
     margin-right: 6px;
 }
 /*十大序号的样式*/
+li>a{
+   color: black;
+}

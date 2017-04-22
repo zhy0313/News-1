@@ -10,3 +10,27 @@
         </ul>
     </div>
 </div>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门军事</h3>
+    </div>
+    <div class="panel-body">
+        <ul>
+            <li ng-repeat="mli in mlis"><a href="{{mli.src}}" target="_blank"><span class="rankDigit">{{$index+1}}</span>&nbsp;{{mli.title}}
+                &nbsp;&nbsp;<span class="badge">{{mli.count}}</span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门科技</h3>
+    </div>
+    <div class="panel-body">
+        <ul>
+            <li ng-repeat="sci in scis"><a href="{{sci.src}}"  target="_blank"><span class="rankDigit">{{$index+1}}</span>&nbsp;{{sci.title}}
+                &nbsp;&nbsp;<span class="badge">{{sci.count}}</span></a>
+            </li>
+        </ul>
+    </div>
+</div>
