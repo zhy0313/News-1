@@ -1,7 +1,8 @@
 这是一个新闻聚合ap
 #### usage 
 ```
-bower install
+$ bower install
+$ npm install
 ```
 
 

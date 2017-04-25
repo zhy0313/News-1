@@ -1,0 +1,32 @@
+{
+  "name": "news",
+  "version": "1.0.0",
+  "description": "这是一个新闻聚合app,前端采用angular.js框架，后端采用php+python(爬虫)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AChaoZJU/News.git"
+  },
+  "keywords": [
+    "news"
+  ],
+  "author": "achao@zju",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AChaoZJU/News/issues"
+  },
+  "homepage": "https://github.com/AChaoZJU/News#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-cssmin": "^2.1.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^2.3.0",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}

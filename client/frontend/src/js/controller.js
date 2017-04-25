@@ -14,7 +14,7 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
             }).success(function (data) {
                 $scope.articles = data;
             }).error(function (data) {
-                console.log("error messgae:" + data)
+                console.log("error messgae:" + data);
             });
         }
         $scope.getDetail=function(item) {
@@ -37,7 +37,7 @@ myController.controller('indexController',['$scope','$http',
             method: 'get',
             url:'client/backend/php/showHot.php'
         }).success(function (data) {
-            $scope.hots=data['hots'];
+            $scope.hots=data.hots;
             $scope.hots.forEach(function (val,index,arr) {
                 switch($scope.hots[index].type){
                     case 'mli':$scope.hots[index].typeCn='军事新闻';break;
@@ -48,13 +48,13 @@ myController.controller('indexController',['$scope','$http',
                     default:$scope.hots[index].typeCn='其他新闻';break;
                 }
             });
-            $scope.mlis=data['mlis'];
-            $scope.scis=data['scis'];
-            $scope.edus=data['edus'];
-            $scope.gams=data['gams'];
-            $scope.ents=data['ents'];
+            $scope.mlis=data.mlis;
+            $scope.scis=data.scis;
+            $scope.edus=data.edus;
+            $scope.gams=data.gams;
+            $scope.ents=data.ents;
         }).error(function (data) {
-            console.log("error messgae:" + data)
+            console.log("error messgae:" + data);
         });
         $scope.getDetail=function (item) {
             $http({
@@ -66,6 +66,6 @@ myController.controller('indexController',['$scope','$http',
             }).error(function (data) {
                 console.log("error messgae:" + data);
             });
-        }
+        };
         
 }]);

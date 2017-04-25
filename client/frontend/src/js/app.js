@@ -15,5 +15,5 @@ myApp.config(['$routeProvider',
         }).
         otherwise({
             redirectTo:'/index'
-        })
+        });
 }]);
