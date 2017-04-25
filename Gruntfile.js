@@ -29,10 +29,30 @@ module.exports=function(grunt){
         jshint:{
             all:['client/frontend/src/js/global.js']
         },
+        htmlmin:{
+            options:{
+                removeComments:true,
+                collapseWhitespace:true,
+                collapseBooleanAttributes:true,
+                useShortDoctype:true,
+                removeAttributeQuotes:true,
+                removeRedundantAttributes:true,
+                removeEmptyAttributes: true,
+                removeOptionalTags: true
+            },
+            html:{
+                files:[{
+                    expand:true,
+                    cwd:'client/frontend/src/html',
+                    src:['*.html'],
+                    dest:'client/frontend/build/html'
+                }]
+            }
+        },
         watch:{
             scripts:{
-                files:['client/frontend/src/js/app.js','client/frontend/src/js/js.controller.js','client/frontend/src/css/main.css'],
-                tasks:['cssmin','concat','jshint','uglify']
+                files:['client/frontend/src/html/*.html','client/frontend/src/js/app.js','client/frontend/src/js/js.controller.js','client/frontend/src/css/main.css'],
+                tasks:['htmlmin','cssmin','concat','jshint','uglify']
             },
             livereload:{
                 options:{
@@ -40,7 +60,9 @@ module.exports=function(grunt){
                 },
                 files:[
                     'client/frontend/build/js/global.min.js',
-                    'client/frontend/build/css/main.min.css'
+                    'client/frontend/build/css/main.min.css',
+                    'client/frontend/build/html/*'
+
                 ]
             }
         },
@@ -65,8 +87,8 @@ module.exports=function(grunt){
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.registerTask('compressjs',['concat','jshint','uglify']);
-    grunt.registerTask('compresscss',['cssmin'])
-    grunt.registerTask('watchit',['cssmin','concat','jshint','uglify','connect','watch']);
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+
+    grunt.registerTask('watchit',['htmlmin','cssmin','concat','jshint','uglify','connect','watch']);
     grunt.registerTask('default');
 };
