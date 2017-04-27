@@ -2,6 +2,16 @@ body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family: Micro
 .panel-body>span{
     float: right;
 }
+#indexBox {
+    display: -webkit-flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+}
+div.panel{
+    flex-grow: 1;
+    padding:10px;
+}
+/*首页flex布局*/
 li {
     list-style-type:none;
 }
