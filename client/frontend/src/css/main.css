@@ -4,12 +4,13 @@ body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family: Micro
 }
 #indexBox {
     display: -webkit-flex;
+    display:flex;
     flex-direction:row;
     flex-wrap: wrap;
 }
 div.panel{
     flex-grow: 1;
-    padding:10px;
+    margin:10px;
 }
 /*首页flex布局*/
 li {
