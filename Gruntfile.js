@@ -51,7 +51,7 @@ module.exports=function(grunt){
         },
         watch:{
             scripts:{
-                files:['client/frontend/src/html/*.html','client/frontend/src/js/app.js','client/frontend/src/js/js.controller.js','client/frontend/src/css/main.css'],
+                files:['client/frontend/src/html/*.html','client/frontend/src/js/app.js','client/frontend/src/js/controller.js','client/frontend/src/css/main.css'],
                 tasks:['htmlmin','cssmin','concat','jshint','uglify']
             },
             livereload:{

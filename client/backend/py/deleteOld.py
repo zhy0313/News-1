@@ -1,10 +1,12 @@
 import myConnect
+import pymysql
 import datetime as dt
-conn=myConnect.myConnect()
+conn = pymysql.connect(host='120.77.34.254', port=3306, user='root', passwd='exciting', db='news', charset="utf8")
 cursor=conn.cursor()
-deadline=dt.datetime.now()-dt.timedelta(days=2)
-types=['mli','sci']
+types=['mli','eco']
 for type in types:
-    sql="DELETE FROM %s"%type+" WHERE time<'%s'" %deadline
+    sql="DELETE FROM mli"
     cursor.execute(sql)
-myConnect.loseConnect(conn,cursor)
+conn.commit()
+cursor.close()
+conn.close()
