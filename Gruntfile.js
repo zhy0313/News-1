@@ -1,6 +1,16 @@
 module.exports=function(grunt){
     grunt.initConfig({
         pkg:grunt.file.readJSON('package.json'),
+        sass:{
+            output:{
+                options:{
+                    style:"expanded"
+                },
+                files:{
+                    'client/frontend/build/css/main.css':"client/frontend/src/css/main.scss"
+                }
+            }
+        },
         concat:{
             options:{
                 //
@@ -22,7 +32,7 @@ module.exports=function(grunt){
             // stripBanners:true,
             },
             build:{
-                src:'client/frontend/src/css/main.css',
+                src:'client/frontend/build/css/main.css',
                 dest:'client/frontend/build/css/main.min.css'
             }
         },
@@ -51,8 +61,8 @@ module.exports=function(grunt){
         },
         watch:{
             scripts:{
-                files:['client/frontend/src/html/*.html','client/frontend/src/js/app.js','client/frontend/src/js/controller.js','client/frontend/src/css/main.css'],
-                tasks:['htmlmin','cssmin','concat','jshint','uglify']
+                files:['client/frontend/src/html/*.html','client/frontend/src/js/app.js','client/frontend/src/js/controller.js','client/frontend/src/css/main.scss'],
+                tasks:['sass','htmlmin','cssmin','concat','jshint','uglify']
             },
             livereload:{
                 options:{
@@ -82,6 +92,7 @@ module.exports=function(grunt){
         }
     });
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -89,6 +100,7 @@ module.exports=function(grunt){
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
+    grunt.registerTask('outputcss',['sass']);
     grunt.registerTask('watchit',['htmlmin','cssmin','concat','jshint','uglify','connect','watch']);
     grunt.registerTask('default');
 };

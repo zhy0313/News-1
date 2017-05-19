@@ -1,0 +1,66 @@
+@charset "UTF-8";
+body, button, input, select, textarea, h1, h2, h3, h4, h5, h6 {
+  font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+
+.panel-body > span {
+  float: right;
+}
+
+#indexBox {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+div.panel {
+  flex-grow: 1;
+  margin: 10px;
+}
+
+/*首页flex布局*/
+li {
+  list-style-type: none;
+}
+
+/*去除li前面的店*/
+li:first-child .rankDigit {
+  background-color: #ea6242;
+}
+
+li:nth-child(2) .rankDigit {
+  background-color: #f7a95e;
+}
+
+li:nth-child(3) .rankDigit {
+  background-color: #f8d0ab;
+}
+
+.rankDigit {
+  width: 19px;
+  height: 14px;
+  border-radius: 5px;
+  color: #ffffff;
+  background-color: #dcdcdc;
+  display: inline-block;
+  line-height: 14px;
+  text-align: center;
+  margin-right: 6px;
+}
+
+/*十大序号的样式*/
+li > a {
+  color: black;
+}
+
+/*显示更多新闻*/
+.more {
+  background: #f5f5f5;
+}
+.more p {
+  text-align: center;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=main.css.map */

@@ -43,9 +43,8 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
                 url:'client/backend/php/showList.php',
                 params: {'type': $scope.type,'count':$scope.count+1}
             }).success(function(data){
+                $scope.articles=$scope.articles.concat(data);
                 $scope.count++;
-                
-
             }).error(function (data) {
                 console.log("error messgae:" + data);
             });
