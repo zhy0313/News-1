@@ -16,6 +16,7 @@
 		$x['author']=$row['author'];
 		$x['time']=$row['time'];
 		$x['count']=$row['count'];
+		$x['imgUrl']=$row['imgUrl'];
 		$arr[] = $x;
 	}
 	$ar['list']=$arr;

@@ -49,7 +49,6 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
                 params: {'type': $scope.type,'count':$scope.count+1}
             }).success(function(data){
                 $scope.articles=$scope.articles.concat(data.list);
-                console.log($scope.articles);
                 $scope.count++;
                 if(data.num<10){
                     $scope.hintMessage="没有更多新闻了";
