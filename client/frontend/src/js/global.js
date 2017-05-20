@@ -1,7 +1,7 @@
 /**
  * Created by achao_zju on 2017/4/17.
  */
-var myApp=angular.module('myApp',['ngRoute','myController']);
+var myApp=angular.module('myApp',['ngRoute','myController','ngSanitize']);
 myApp.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
@@ -12,6 +12,10 @@ myApp.config(['$routeProvider',
         when('/:type',{
             templateUrl:'client/frontend/build/html/type.html',
             controller:'mliController'
+        }).
+        when('/:type/:id',{
+            templateUrl:'client/frontend/build/html/detail.html',
+            controller:'detailController'
         }).
         otherwise({
             redirectTo:'/index'
@@ -50,16 +54,8 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
             });
         };
         $scope.getDetail=function(item) {
-            window.open(item.src);
-            $http({
-                method:'get',
-                url:'client/backend/php/count.php',
-                params:{'id':item.id,'type':$scope.type}
-            }).success(function (data) {
-                item.count++;
-            }).error(function (data) {
-                console.log("error messgae:" + data);
-            });
+            $location.path($scope.type+"/"+item.id);
+            //window.open(item.src);
         };
 }]);
 
@@ -100,4 +96,19 @@ myController.controller('indexController',['$scope','$http',
             });
         };
         
+}]);
+
+myController.controller('detailController',['$scope','$http','$routeParams',
+    function($scope,$http,$routeParams){
+        $http({
+            method:'get',
+            url:'client/backend/php/getDetail.php',
+            params:{'id':$routeParams.id,'type':$routeParams.type}
+        }).success(function (data) {
+            $scope.news=data;
+            console.log($scope.news);
+            
+        }).error(function (data) {
+            console.log("error messgae:" + data);
+        });
 }]);

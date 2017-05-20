@@ -49,4 +49,25 @@ li>a{
         cursor: pointer;
     }
 }
-
+/*新闻详情*/
+#newsDetail{
+    margin-left: 15px;
+}
+/*文章标题*/
+#title{
+   font-size: 34px;
+    font-weight: 700;
+    line-height: 48px;
+    color: #222;
+}
+/*时间和来源（author）*/
+#newsInfo{
+    font-size: 13px;
+    span{
+        color:#777
+    }
+}
+/*文章内容*/
+#newsContent{
+    margin: 20px;
+}

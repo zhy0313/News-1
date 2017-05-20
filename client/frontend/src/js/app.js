@@ -1,7 +1,7 @@
 /**
  * Created by achao_zju on 2017/4/17.
  */
-var myApp=angular.module('myApp',['ngRoute','myController']);
+var myApp=angular.module('myApp',['ngRoute','myController','ngSanitize']);
 myApp.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
@@ -12,6 +12,10 @@ myApp.config(['$routeProvider',
         when('/:type',{
             templateUrl:'client/frontend/build/html/type.html',
             controller:'mliController'
+        }).
+        when('/:type/:id',{
+            templateUrl:'client/frontend/build/html/detail.html',
+            controller:'detailController'
         }).
         otherwise({
             redirectTo:'/index'
