@@ -88,5 +88,9 @@ li > a {
 #newsContent {
   margin: 20px;
 }
+#newsContent img {
+  display: block;
+  margin: 0 auto;
+}
 
 /*# sourceMappingURL=main.css.map */
