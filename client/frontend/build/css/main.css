@@ -24,6 +24,11 @@ li {
   list-style-type: none;
 }
 
+/*对齐高度*/
+form > select {
+  height: 42px;
+}
+
 /*去除li前面的店*/
 li:first-child .rankDigit {
   background-color: #ea6242;
@@ -62,6 +67,11 @@ li > a {
   flex-direction: row;
   margin: 15px;
 }
+#newsList .listImg {
+  width: 200px;
+  height: 100px;
+  margin-left: 10px;
+}
 
 /*显示更多新闻*/
 .more {
@@ -73,11 +83,6 @@ li > a {
 }
 
 /*列表页图片新闻浮动*/
-.listImg {
-  width: 200px;
-  height: 100px;
-}
-
 /*新闻详情*/
 #newsDetail {
   margin-left: 15px;
@@ -106,6 +111,45 @@ li > a {
 #newsContent img {
   display: block;
   margin: 0 auto;
+}
+
+/*注册区内容*/
+#up header {
+  display: -webkit-flex;
+  /* Safari */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+#up header div {
+  background-color: #ddd;
+  height: 35px;
+  width: 200px;
+}
+#up header div p {
+  line-height: 35px;
+  margin-left: 10px;
+}
+#up article {
+  margin-top: 15px;
+  width: 100%;
+  text-align: center;
+}
+#up article div.process {
+  display: -webkit-flex;
+  /* Safari */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  display: inline-block;
+}
+#up article div.process div {
+  margin-bottom: 30px;
+  height: 30px;
+}
+#up article div.process div button {
+  margin-left: 0;
 }
 
 /*# sourceMappingURL=main.css.map */

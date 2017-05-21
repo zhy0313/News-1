@@ -86,10 +86,36 @@ myController.controller('detailController',['$scope','$http','$routeParams',
             url:'client/backend/php/getDetail.php',
             params:{'id':$routeParams.id,'type':$routeParams.type}
         }).success(function (data) {
-            $scope.news=data;
-            console.log($scope.news);
-            
+            $scope.news=data;        
         }).error(function (data) {
             console.log("error messgae:" + data);
         });
+}]);
+
+myController.controller('upController',["$scope","$http",function($scope,$http){
+    $("#verifyEmail").css("background-color","#ff6d28");
+    $scope.oneInProcess=true;
+    $scope.twoInProcess=false;
+    $scope.threeInProcess=false;
+    $scope.sendCode=function(item){
+        $http({
+            method:'get',
+            url:'client/backend/php/sendCode.php',
+            params:{'email':$scope.email}
+        }).success(function(data){
+
+        }).error(function (data) {
+            console.log("error messgae:" + data);
+        });
+    };
+
+    // $http({
+    //     method:'get',
+    //     ulr:'client/backend/php/up.php',
+    //     params:{}
+    // }).success(function (data) {
+              
+    //     }).error(function (data) {
+    //         console.log("error messgae:" + data);
+    //     });
 }]);
