@@ -113,43 +113,12 @@ li > a {
   margin: 0 auto;
 }
 
-/*注册区内容*/
-#up header {
-  display: -webkit-flex;
-  /* Safari */
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-#up header div {
-  background-color: #ddd;
-  height: 35px;
-  width: 200px;
-}
-#up header div p {
-  line-height: 35px;
-  margin-left: 10px;
-}
-#up article {
-  margin-top: 15px;
-  width: 100%;
+#signUp .modal-body {
   text-align: center;
+  margin: 0 auto;
 }
-#up article div.process {
-  display: -webkit-flex;
-  /* Safari */
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  display: inline-block;
-}
-#up article div.process div {
-  margin-bottom: 30px;
-  height: 30px;
-}
-#up article div.process div button {
-  margin-left: 0;
+#signUp .modal-body input {
+  width: 300px;
 }
 
 /*# sourceMappingURL=main.css.map */
