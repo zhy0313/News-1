@@ -13,6 +13,7 @@
 </head>
 
 <body ng-app="myApp">
+
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -55,6 +56,7 @@
 
 
 <!-- Modal -->
+
 <div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -63,11 +65,23 @@
         <h4 class="modal-title" id="myModalLabel">请输入注册邮箱</h4>
       </div>
       <div class="modal-body">
-          <input placeholder="邮箱">
+        <div class="form-group">
+          <input id='user_name' class="form-control" placeholder="用户名:6个字符及以上">
+          <p class="warn-info"></p>
+          <input class="form-control"  type="password" placeholder="密码：6个字符及以上">
+          <p class="warn-info"></p>
+          <input class="form-control"  type="password" placeholder="重复输入密码">
+          <input class="form-control"  type="email" placeholder="重复输入密码">
+
+        </div>
+
+
       </div>
       <div class="modal-footer">
+          <div class="form-group">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
         <button id="sendCode" type="button" class="btn btn-primary">发送验证码</button>
+          </div>
       </div>
     </div>
   </div>

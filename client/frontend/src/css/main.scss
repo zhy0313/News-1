@@ -95,59 +95,13 @@ li>a{
         margin:0 auto;
     }
 }
-// /*注册区内容*/
-// @mixin myFlex($myDirection,$myAlign){
-//      display: -webkit-flex; /* Safari */
-//      display: flex;
-//      flex-direction: $myDirection;
-//      align-items: $myAlign;
-// }
-// // @mixin myCenterDiv{
-// //     text-align: center;
-// //     margin: 0 auto;
-// // }
-// $processHeight:35px;
-// #up {
-// header{
-//      @include myFlex(row,center);
-//      justify-content: center;
-//      div{
-//         background-color: #ddd;
-//         height: $processHeight;
-//         width: 200px;
-//         p{
-//             line-height: $processHeight;
-//             margin-left: 10px;
-//         }
-//      }
-     
-// }
-// $inputHeight:30px;
-// article{
-//     margin-top:15px; 
-//     width: 100%;
-//     text-align: center;
-//     div.process{
-//         @include myFlex(column,flex-start);
-//         display: inline-block;
-//         div{
-//             margin-bottom: 30px;
-//             height:$inputHeight;
-//             button{
-//                 margin-left: 0;
-//             }
-//         }
-//     }
-// }
-// }
-@mixin myCenterDiv{
-    text-align: center;
-    margin: 0 auto;
-}
-#signUp .modal-body{
-    @include myCenterDiv();
+
+#signUp{
     input{
-        width: 300px;
+        margin-bottom: 10px;
+    }
+    .warn-info{
+        color: red;
     }
 }
 
