@@ -7,13 +7,14 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
         $rootScope.orderProp='-time';
         $scope.type=$routeParams.type;
         $scope.count=1;
+        $scope.hintMessage="显示更多新闻";
         if($scope.type!==undefined) {
             $http({
                 method: 'get',
                 url: 'client/backend/php/showList.php',
                 params: {'type': $scope.type,'count':$scope.count}
             }).success(function (data) {
-                $scope.articles = data;
+                $scope.articles = data.list;
             }).error(function (data) {
                 console.log("error messgae:" + data);
             });
@@ -24,8 +25,11 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
                 url:'client/backend/php/showList.php',
                 params: {'type': $scope.type,'count':$scope.count+1}
             }).success(function(data){
-                $scope.articles=$scope.articles.concat(data);
+                $scope.articles=$scope.articles.concat(data.list);
                 $scope.count++;
+                if(data.num<10){
+                    $scope.hintMessage="没有更多新闻了";
+                }
             }).error(function (data) {
                 console.log("error messgae:" + data);
             });
@@ -82,10 +86,9 @@ myController.controller('detailController',['$scope','$http','$routeParams',
             url:'client/backend/php/getDetail.php',
             params:{'id':$routeParams.id,'type':$routeParams.type}
         }).success(function (data) {
-            $scope.news=data;
-            console.log($scope.news);
-            
+            $scope.news=data;        
         }).error(function (data) {
             console.log("error messgae:" + data);
         });
 }]);
+

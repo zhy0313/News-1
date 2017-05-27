@@ -9,6 +9,10 @@ myApp.config(['$routeProvider',
             templateUrl:'client/frontend/build/html/index.html',
             controller:'indexController'
         }).
+        when('/up',{
+            templateUrl:'client/frontend/build/html/up.html',
+            controller:'upController'
+        }).
         when('/:type',{
             templateUrl:'client/frontend/build/html/type.html',
             controller:'mliController'
@@ -30,13 +34,14 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
         $rootScope.orderProp='-time';
         $scope.type=$routeParams.type;
         $scope.count=1;
+        $scope.hintMessage="显示更多新闻";
         if($scope.type!==undefined) {
             $http({
                 method: 'get',
                 url: 'client/backend/php/showList.php',
                 params: {'type': $scope.type,'count':$scope.count}
             }).success(function (data) {
-                $scope.articles = data;
+                $scope.articles = data.list;
             }).error(function (data) {
                 console.log("error messgae:" + data);
             });
@@ -47,8 +52,11 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
                 url:'client/backend/php/showList.php',
                 params: {'type': $scope.type,'count':$scope.count+1}
             }).success(function(data){
-                $scope.articles=$scope.articles.concat(data);
+                $scope.articles=$scope.articles.concat(data.list);
                 $scope.count++;
+                if(data.num<10){
+                    $scope.hintMessage="没有更多新闻了";
+                }
             }).error(function (data) {
                 console.log("error messgae:" + data);
             });
@@ -105,10 +113,57 @@ myController.controller('detailController',['$scope','$http','$routeParams',
             url:'client/backend/php/getDetail.php',
             params:{'id':$routeParams.id,'type':$routeParams.type}
         }).success(function (data) {
-            $scope.news=data;
-            console.log($scope.news);
-            
+            $scope.news=data;        
         }).error(function (data) {
             console.log("error messgae:" + data);
         });
 }]);
+
+
+$(document).ready(function(){
+    $('#user_name').bind('blur',function(){ // 检查账号合法性
+        var user_name=$('#user_name').val();
+        if(user_name.length<6){
+             $('.warn-info').first().text('* 用户名至少6位字符');
+             return;
+        }
+        $.ajax({
+            url:"client/backend/php/checkUserName.php?user_name="+user_name,
+            method:"get",
+            success:function(data){
+                if(data.num>0){
+                    $('.warn-info').first().text('* 用户名重复');
+                }else{
+                    $('.warn-info').first().text('');
+                }
+            }
+        });
+    });
+    $("#signUp input:eq(1)").bind('blur',function(){
+        var password=$(this).val();
+        if(password.length<6){
+            $('.warn-info:eq(1)').text('* 密码至少6位字符');
+        }else{
+            $('.warn-info:eq(1)').text('');
+        }
+    });
+    $('#signUp input:eq(2)').bind('blur',function(){
+        var rePassword=$(this).val();
+        var password=$('#signUp input:eq(1)').val();
+        if(password!=rePassword){
+            $('.warn-info:eq(2)').text('* 密码不一致');
+        }else{
+            $('.warn-info:eq(2)').text('');
+        }
+    });
+    $('#signUp input:eq(3)').bind('blur',function(){
+        var email=$(this).val();
+        var reg=/^\w+@\w+\.(com)$/;
+        if(!email.match(reg)){
+            $('.warn-info:eq(3)').text('* 不是有效邮箱');
+        }else{
+            $('.warn-info:eq(3)').text('');
+        }
+    });
+});
+

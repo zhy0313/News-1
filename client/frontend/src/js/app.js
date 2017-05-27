@@ -9,6 +9,10 @@ myApp.config(['$routeProvider',
             templateUrl:'client/frontend/build/html/index.html',
             controller:'indexController'
         }).
+        when('/up',{
+            templateUrl:'client/frontend/build/html/up.html',
+            controller:'upController'
+        }).
         when('/:type',{
             templateUrl:'client/frontend/build/html/type.html',
             controller:'mliController'

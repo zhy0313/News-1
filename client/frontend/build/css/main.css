@@ -24,6 +24,11 @@ li {
   list-style-type: none;
 }
 
+/*对齐高度*/
+form > select {
+  height: 42px;
+}
+
 /*去除li前面的店*/
 li:first-child .rankDigit {
   background-color: #ea6242;
@@ -54,6 +59,20 @@ li > a {
   color: black;
 }
 
+/*flex布局列表页*/
+#newsList {
+  display: -webkit-flex;
+  /* Safari */
+  display: flex;
+  flex-direction: row;
+  margin: 15px;
+}
+#newsList .listImg {
+  width: 200px;
+  height: 100px;
+  margin-left: 10px;
+}
+
 /*显示更多新闻*/
 .more {
   background: #f5f5f5;
@@ -63,6 +82,7 @@ li > a {
   cursor: pointer;
 }
 
+/*列表页图片新闻浮动*/
 /*新闻详情*/
 #newsDetail {
   margin-left: 15px;
@@ -87,6 +107,17 @@ li > a {
 /*文章内容*/
 #newsContent {
   margin: 20px;
+}
+#newsContent img {
+  display: block;
+  margin: 0 auto;
+}
+
+#signUp input {
+  margin-bottom: 10px;
+}
+#signUp .warn-info {
+  color: red;
 }
 
 /*# sourceMappingURL=main.css.map */

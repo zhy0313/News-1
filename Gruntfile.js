@@ -16,7 +16,7 @@ module.exports=function(grunt){
                 //
             },
             dist:{
-                src:['client/frontend/src/js/app.js','client/frontend/src/js/controller.js'],
+                src:['client/frontend/src/js/app.js','client/frontend/src/js/controller.js','client/frontend/src/js/index.js'],
                 dest:'client/frontend/src/js/global.js'
             }
         },
@@ -61,7 +61,7 @@ module.exports=function(grunt){
         },
         watch:{
             scripts:{
-                files:['client/frontend/src/html/*.html','client/frontend/src/js/app.js','client/frontend/src/js/controller.js','client/frontend/src/css/main.scss'],
+                files:['client/frontend/src/html/*.html','client/frontend/src/js/*.js','client/frontend/src/css/main.scss'],
                 tasks:['sass','htmlmin','cssmin','concat','jshint','uglify']
             },
             livereload:{
@@ -99,6 +99,7 @@ module.exports=function(grunt){
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
+
 
     grunt.registerTask('outputcss',['sass']);
     grunt.registerTask('watchit',['htmlmin','cssmin','concat','jshint','uglify','connect','watch']);
