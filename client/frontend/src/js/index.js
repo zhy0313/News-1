@@ -42,6 +42,42 @@ $(document).ready(function(){
         }else{
             $('.warn-info:eq(3)').text('');
         }
+        $.ajax({
+            url:"client/backend/php/checkEmail.php?email="+email,
+            method:"get",
+            success:function(data){
+                if(data.num>0){
+                    $('.warn-info:eq(3)').text('* 邮箱已经被注册');
+                }else{
+                    $('.warn-info:eq(3)').text('');
+                }
+            }
+        });
     });
+    $('#signUp .modal-footer button').eq(1).bind('click',function(){
+        var toUp=true;
+         $('.warn-info').each(function(){
+            if($(this).text()){
+                toUp=false;return false;
+            }
+         });
+        var user_name=$('#user_name').val();
+        var password=$('#signUp input:eq(1)').val();
+        var email=$('#signUp input:eq(2)').val();
+        $.ajax({
+            url:"client/backend/php/up.php",
+            method:"post",
+            datatype:JSON,
+            data:{user_name:user_name,password:password,email:email},
+            success:function(data){
+                if($res.code==0){
+                   alert("成功注册");
+                }else{
+                   alert("成功失败");
+                }
+            }
+        });
+    });
+    
 });
 
