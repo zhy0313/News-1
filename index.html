@@ -11,9 +11,8 @@
     <script src="bower_components/bower-angularjs/angular-sanitize.min.js"></script>
 
 </head>
-
 <body ng-app="myApp">
-
+<!--<div class="alert alert-danger hide" role="alert"> </div>-->
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -54,9 +53,7 @@
 </nav>
 <!-- Button trigger modal -->
 
-
 <!-- Modal -->
-
 <div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -80,8 +77,9 @@
       </div>
       <div class="modal-footer">
           <div class="form-group">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary">注册</button>
+            <span class="warn-info left"></span>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary">注册</button>
           </div>
       </div>
     </div>

@@ -28,7 +28,7 @@ $(document).ready(function(){
     $('#signUp input:eq(2)').bind('blur',function(){
         var rePassword=$(this).val();
         var password=$('#signUp input:eq(1)').val();
-        if(password!=rePassword){
+        if(password!==rePassword){
             $('.warn-info:eq(2)').text('* 密码不一致');
         }else{
             $('.warn-info:eq(2)').text('');
@@ -56,24 +56,35 @@ $(document).ready(function(){
     });
     $('#signUp .modal-footer button').eq(1).bind('click',function(){
         var toUp=true;
-         $('.warn-info').each(function(){
-            if($(this).text()){
-                toUp=false;return false;
-            }
-         });
         var user_name=$('#user_name').val();
         var password=$('#signUp input:eq(1)').val();
-        var email=$('#signUp input:eq(2)').val();
+        var rePassword=$('#signUp input:eq(2)').val();
+        var email=$('#signUp input:eq(3)').val();
+
+        if(user_name.length<6||password.length<6||rePassword!==password){
+            toUp=false;
+        }
+        var reg=/^\w+@\w+\.(com)$/;
+        if(!email.match(reg)){
+            toUp=false;
+        }        
+        if(!toUp){
+             $('#signUp .modal-footer span').text("* 信息不完整或不合法");
+             return;
+        }else{
+            $('#signUp .modal-footer span').text("");
+        }
+        
         $.ajax({
             url:"client/backend/php/up.php",
             method:"post",
             datatype:JSON,
             data:{user_name:user_name,password:password,email:email},
             success:function(data){
-                if($res.code==0){
+                if(data.code===0){
                    alert("成功注册");
                 }else{
-                   alert("成功失败");
+                   alert("注册失败");
                 }
             }
         });
