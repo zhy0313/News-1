@@ -25,3 +25,12 @@ myApp.config(['$routeProvider',
             redirectTo:'/index'
         });
 }]);
+myApp.service('ifLogin',function(){
+    this.keepLogin=function(){
+        var right=$('.navbar-nav.navbar-right');
+        right.children().first().removeClass('hide').show();
+        right.children().eq(1).hide();
+        right.children().eq(2).hide();
+        $('.navbar-nav.navbar-right li.dropdown>a').html($.cookie('user_name')+'<span class="glyphicon glyphicon-menu-down"></span>');
+    };
+});

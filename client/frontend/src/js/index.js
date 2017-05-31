@@ -82,13 +82,65 @@ $(document).ready(function(){
             data:{user_name:user_name,password:password,email:email},
             success:function(data){
                 if(data.code===0){
-                   alert("成功注册");
+                   alert("注册成功");
+                   $("#signUp").modal('hide');
                 }else{
-                   alert("注册失败");
+                    $('#signUp .modal-footer span').text("* 注册失败");                }
+            }
+        });
+    });
+    $('#signIn .modal-body input').first().bind('blur',function(){
+        if($(this).val().length===0){
+            $('#signIn .warn-info').first().text("* 邮箱不得为空");
+            return;
+        }else{
+            $('#signIn .warn-info').first().text("");
+        }
+        var email=$(this).val();
+        var reg=/^\w+@\w+\.(com)$/;
+        if(!email.match(reg)){
+            $(this).next().text('* 不是有效邮箱');
+        }else{
+           $(this).next().text('');
+        }
+    });
+    $('#signIn .modal-body input:eq(1)').bind('blur',function(){
+        if($(this).val().length===0){
+            $(this).next().text("* 密码不得为空");
+        }else{
+            $(this).next().text("");
+        }
+    });
+    
+    $('#signIn .modal-footer button:eq(1)').bind('click',function(){
+        var email= $('#signIn .modal-body input').first().val();
+        var password=$('#signIn .modal-body input:eq(1)').val();
+        var reg=/^\w+@\w+\.(com)$/;
+        if(!email||!email.match(reg)||!password){
+            $('#signIn .modal-footer .warn-info').text('* 信息不完整或不合法');
+        }else{
+            $('#signIn .modal-footer .warn-info').text('');
+        }
+        $.ajax({
+            url:"client/backend/php/in.php",
+            method:"post",
+            datatype:JSON,
+            data:{password:password,email:email},
+            success:function(data){
+                if(data.code===0){
+                   alert("登录成功");
+                   var right=$('.navbar-nav.navbar-right');
+                   right.children().first().removeClass('hide').show();
+                   right.children().eq(1).hide();
+                   right.children().eq(2).hide();
+                   $('.navbar-nav.navbar-right li.dropdown>a').html(data.data.user_name+'<span class="glyphicon glyphicon-menu-down"></span>');
+                 //  console.log( $('.navbar-nav.navbar-right li.dropdown>a')[0]);
+                   $.cookie('user_name',data.data.user_name);
+                   $('#signIn').modal('hide');
+                }else{
                 }
             }
         });
     });
-    
 });
 

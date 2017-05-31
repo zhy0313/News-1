@@ -120,7 +120,9 @@ li > a {
 #signUp input {
   margin-bottom: 10px;
 }
-#signUp .warn-info {
+
+/*一些全局通用样式*/
+.warn-info {
   color: red;
 }
 

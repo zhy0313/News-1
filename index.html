@@ -12,7 +12,6 @@
 
 </head>
 <body ng-app="myApp">
-<!--<div class="alert alert-danger hide" role="alert"> </div>-->
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -44,8 +43,14 @@
             </form>
 
             <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown hide">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown</a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a>登出</a></li>                    
+                        </ul>
+                </li>
                 <li><a  data-toggle="modal" data-target="#signUp">注册</a></li>
-                <li><a href="#in">登录</a></li>
+                <li><a  data-toggle="modal" data-target="#signIn">登录</a></li>
                 <li><a href="#set">设置</a></li>
             </ul>
         </div>
@@ -59,7 +64,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">请输入注册邮箱</h4>
+        <h4 class="modal-title" id="myModalLabel">注册账号</h4>
       </div>
       <div class="modal-body">
         <div class="form-group">
@@ -72,8 +77,6 @@
           <input class="form-control"  type="email" placeholder="邮箱:只支持.com域名的邮箱">
           <p class="warn-info"></p>
         </div>
-
-
       </div>
       <div class="modal-footer">
           <div class="form-group">
@@ -85,10 +88,36 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="signIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">登录</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input class="form-control" placeholder="邮箱">
+          <p class="warn-info"></p>
+          <input class="form-control"  type="password" placeholder="密码">
+          <p class="warn-info"></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <div class="form-group">
+            <span class="warn-info"></span>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary">登录</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
 <ng-view></ng-view>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
     <!--app.js+controller.js+index.js//index.js依赖jQuery-->
-     <script src="client/frontend/build/js/global.min.js"></script>
+    <script src="client/frontend/build/js/global.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

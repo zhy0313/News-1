@@ -1,7 +1,6 @@
 <?php
 include 'connect.php';
 error_reporting(E_ERROR|E_WARNING);
-
 $types=['mli','sci','hot','gam','ent','edu'];
 $hots = [];
 $sort=[];

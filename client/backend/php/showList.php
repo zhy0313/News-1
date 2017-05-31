@@ -1,6 +1,8 @@
 <?php
 	include 'connect.php';
 	error_reporting(E_ERROR|E_WARNING);
+	session_start();
+//	echo json_encode($_SESSION['ifLogin'], JSON_UNESCAPED_UNICODE);
 	$type=$_GET['type'];
 	$count=$_GET['count'];$before=($count-1)*10;
 	$sql="select * from ".$type." order by time desc limit ".$before.",10";
@@ -20,6 +22,7 @@
 		$arr[] = $x;
 	}
 	$ar['list']=$arr;
+	$ar['ifLogin']=$_SESSION['ifLogin'];
 	$ar['num']=$num;
 	echo json_encode($ar, JSON_UNESCAPED_UNICODE);
 	$conn->close();

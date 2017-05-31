@@ -2,8 +2,9 @@
  * Created by achao_zju on 2017/4/17.
  */
 var myController=angular.module('myController',[]);
-myController.controller('mliController',['$scope','$http','$routeParams','$location','$rootScope',
-    function ($scope,$http,$routeParams,$location,$rootScope) {
+myController.controller('mliController',['$scope','$http','$routeParams','$location','$rootScope','ifLogin',
+    function ($scope,$http,$routeParams,$location,$rootScope,ifLogin) {
+        ifLogin.keepLogin();
         $rootScope.orderProp='-time';
         $scope.type=$routeParams.type;
         $scope.count=1;
@@ -40,8 +41,9 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
         };
 }]);
 
-myController.controller('indexController',['$scope','$http',
-    function ($scope,$http) {
+myController.controller('indexController',['$scope','$http','ifLogin',
+    function ($scope,$http,ifLogin) {
+        ifLogin.keepLogin();
         $http({
             method: 'get',
             url:'client/backend/php/showHot.php'
