@@ -4,7 +4,6 @@
 var myController=angular.module('myController',[]);
 myController.controller('mliController',['$scope','$http','$routeParams','$location','$rootScope','ifLogin',
     function ($scope,$http,$routeParams,$location,$rootScope,ifLogin) {
-        ifLogin.keepLogin();
         $rootScope.orderProp='-time';
         $scope.type=$routeParams.type;
         $scope.count=1;
@@ -15,6 +14,9 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
                 url: 'client/backend/php/showList.php',
                 params: {'type': $scope.type,'count':$scope.count}
             }).success(function (data) {
+                if(data.ifLogin){
+                    ifLogin.keepLogin();
+                }
                 $scope.articles = data.list;
             }).error(function (data) {
                 console.log("error messgae:" + data);
@@ -88,6 +90,9 @@ myController.controller('detailController',['$scope','$http','$routeParams',
             url:'client/backend/php/getDetail.php',
             params:{'id':$routeParams.id,'type':$routeParams.type}
         }).success(function (data) {
+            if(data.ifLogin){
+                ifLogin.keepLogin();
+            }
             $scope.news=data;        
         }).error(function (data) {
             console.log("error messgae:" + data);

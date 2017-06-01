@@ -1,8 +1,8 @@
 /**
  * Created by achao_zju on 2017/4/17.
  */
-var myApp=angular.module('myApp',['ngRoute','myController','ngSanitize']);
-myApp.config(['$routeProvider',
+angular.module('myApp',['ngRoute','myController','ngSanitize'])
+.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
         when('/index',{
@@ -24,8 +24,8 @@ myApp.config(['$routeProvider',
         otherwise({
             redirectTo:'/index'
         });
-}]);
-myApp.service('ifLogin',function(){
+}])
+.service('ifLogin',function(){
     this.keepLogin=function(){
         var right=$('.navbar-nav.navbar-right');
         right.children().first().removeClass('hide').show();
@@ -33,14 +33,31 @@ myApp.service('ifLogin',function(){
         right.children().eq(2).hide();
         $('.navbar-nav.navbar-right li.dropdown>a').html($.cookie('user_name')+'<span class="glyphicon glyphicon-menu-down"></span>');
     };
-});
+})
+.service('loginOut',function(){
+    this.loginOut=function(){
+        var right=$('.navbar-nav.navbar-right');
+        right.children().first().hide();
+        right.children().eq(1).show();
+        right.children().eq(2).show();
+    };
+})
+.run(['$rootScope','$http','loginOut',function($rootScope,$http,loginOut){
+    $rootScope.loginOut=loginOut.loginOut;
+    $http({
+        method:'get',
+        url:'client/backend/php/loginOut.php',
+        params:{'user_name':$.cookie('user_name')},
+    }).success(function(data){
+    }).error(function(data){
+    });
+}]);
 /**
  * Created by achao_zju on 2017/4/17.
  */
 var myController=angular.module('myController',[]);
 myController.controller('mliController',['$scope','$http','$routeParams','$location','$rootScope','ifLogin',
     function ($scope,$http,$routeParams,$location,$rootScope,ifLogin) {
-        ifLogin.keepLogin();
         $rootScope.orderProp='-time';
         $scope.type=$routeParams.type;
         $scope.count=1;
@@ -51,6 +68,9 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
                 url: 'client/backend/php/showList.php',
                 params: {'type': $scope.type,'count':$scope.count}
             }).success(function (data) {
+                if(data.ifLogin){
+                    ifLogin.keepLogin();
+                }
                 $scope.articles = data.list;
             }).error(function (data) {
                 console.log("error messgae:" + data);
@@ -124,6 +144,9 @@ myController.controller('detailController',['$scope','$http','$routeParams',
             url:'client/backend/php/getDetail.php',
             params:{'id':$routeParams.id,'type':$routeParams.type}
         }).success(function (data) {
+            if(data.ifLogin){
+                ifLogin.keepLogin();
+            }
             $scope.news=data;        
         }).error(function (data) {
             console.log("error messgae:" + data);
@@ -271,6 +294,7 @@ $(document).ready(function(){
                    $.cookie('user_name',data.data.user_name);
                    $('#signIn').modal('hide');
                 }else{
+                    $('#signIn').find('.warn-info').last().text('* '+data.msg);
                 }
             }
         });

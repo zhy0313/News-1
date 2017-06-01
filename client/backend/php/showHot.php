@@ -1,6 +1,7 @@
 <?php
 include 'connect.php';
 error_reporting(E_ERROR|E_WARNING);
+session_start();
 $types=['mli','sci','hot','gam','ent','edu'];
 $hots = [];
 $sort=[];
@@ -41,6 +42,7 @@ foreach ($types as $type){
 }
 array_multisort($sort,SORT_DESC,$hots);
 $arr['hots']=$hots;
+$arr['ifLogin']=$_SESSION['ifLigin'];
 echo json_encode($arr, JSON_UNESCAPED_UNICODE);
 $conn->close();
 ?>

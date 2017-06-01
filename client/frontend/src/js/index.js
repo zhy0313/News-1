@@ -138,6 +138,7 @@ $(document).ready(function(){
                    $.cookie('user_name',data.data.user_name);
                    $('#signIn').modal('hide');
                 }else{
+                    $('#signIn').find('.warn-info').last().text('* '+data.msg);
                 }
             }
         });
