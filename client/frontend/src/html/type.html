@@ -1,7 +1,7 @@
 <article >
         <div ng-repeat="article in articles |filter:keyword |orderBy:orderProp" id="newsList">
             <img class="listImg" ng-if="article.imgUrl!='www.zju.edu.cn'" ng-src="{{article.imgUrl}}">
-            <div class="panel panel-primary" >
+            <div class="panel panel-info" >
                 <div class="panel-heading" ng-click="getDetail(article)">
                     <h3 class="panel-title">{{article.title}}</h3>
                 </div>
