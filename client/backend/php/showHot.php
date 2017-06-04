@@ -2,15 +2,15 @@
 include 'connect.php';
 error_reporting(E_ERROR|E_WARNING);
 session_start();
-$types=['mli','sci','hot','gam','ent','edu'];
+$types=['mli','sci','hot','eco','spo','edu'];
 $hots = [];
 $sort=[];
 $arr=array(
     'mlis'=>array(),
     'scis'=>array(),
     'hots'=>array(),
-    'gams'=>array(),
-    'ents'=>array(),
+    'ecos'=>array(),
+    'spos'=>array(),
     'edus'=>array()
 );
 foreach ($types as $type){
@@ -36,8 +36,8 @@ foreach ($types as $type){
         case 'mli':$arr['mlis']=$tmp;break;
         case 'sci':$arr['scis']=$tmp;break;
         case 'edu':$arr['edus']=$tmp;break;
-        case 'ent':$arr['ents']=$tmp;break;
-        case 'gam':$arr['gams']=$tmp;break;
+        case 'eco':$arr['ecos']=$tmp;break;
+        case 'spo':$arr['spos']=$tmp;break;
     }
 }
 array_multisort($sort,SORT_DESC,$hots);

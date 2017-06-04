@@ -8,7 +8,7 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
         when('/index',{
             templateUrl:'client/frontend/build/html/index.html',
             controller:'indexController'
-        }).
+        }).       
         when('/preference',{
             templateUrl:'client/frontend/build/html/preference.html',
             controller:'preController'
@@ -105,8 +105,8 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
         };
 }]);
 
-myController.controller('indexController',['$scope','$http','ifLogin',
-    function ($scope,$http,ifLogin) {
+myController.controller('indexController',['$scope','$http','ifLogin','$location',
+    function ($scope,$http,ifLogin,$location) {
         ifLogin.keepLogin();
         $http({
             method: 'get',
@@ -118,29 +118,25 @@ myController.controller('indexController',['$scope','$http','ifLogin',
                     case 'mli':$scope.hots[index].typeCn='军事新闻';break;
                     case 'edu':$scope.hots[index].typeCn='教育新闻';break;
                     case 'sci':$scope.hots[index].typeCn='科技新闻';break;
-                    case 'gam':$scope.hots[index].typeCn='游戏新闻';break;
-                    case 'ent':$scope.hots[index].typeCn='娱乐新闻';break;
+                    case 'eco':$scope.hots[index].typeCn='经济新闻';break;
+                    case 'spo':$scope.hots[index].typeCn='体育新闻';break;
                     default:$scope.hots[index].typeCn='其他新闻';break;
                 }
             });
-            $scope.mlis=data.mlis;
-            $scope.scis=data.scis;
-            $scope.edus=data.edus;
-            $scope.gams=data.gams;
-            $scope.ents=data.ents;
+            data.mlis.name='军事';
+            data.scis.name='科技';
+            data.edus.name='教育';
+            data.spos.name='体育';
+            data.ecos.name='经济';
+
+            $scope.types=[];
+            $scope.types.push(data.mlis,data.scis,data.edus,data.spos,data.ecos,data.hots);
+
         }).error(function (data) {
             console.log("error messgae:" + data);
         });
-        $scope.getDetail=function (item) {
-            $http({
-                method:'get',
-                url:'client/backend/php/count.php',
-                params:{'id':item.id,'type':item.type}
-            }).success(function (data) {
-                item.count++;
-            }).error(function (data) {
-                console.log("error messgae:" + data);
-            });
+        $scope.getDetail=function (item,type) {
+           $location.path(type+"/"+item.id);
         };
         
 }]);
@@ -155,7 +151,7 @@ myController.controller('detailController',['$scope','$http','$routeParams','ifL
             if(data.ifLogin){
                 ifLogin.keepLogin();
             }
-            $scope.news=data;        
+            $scope.news=data;
         }).error(function (data) {
             console.log("error messgae:" + data);
         });

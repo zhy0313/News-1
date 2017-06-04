@@ -8,7 +8,7 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
         when('/index',{
             templateUrl:'client/frontend/build/html/index.html',
             controller:'indexController'
-        }).
+        }).       
         when('/preference',{
             templateUrl:'client/frontend/build/html/preference.html',
             controller:'preController'
