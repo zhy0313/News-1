@@ -108,3 +108,19 @@ li>a{
 .warn-info{
     color: red;
 }
+
+/*偏好设置模块*/
+/*设置checkbox的间距*/
+$outerMargin:40px;
+#setPre{
+    margin-left: $outerMargin;
+    margin-top: $outerMargin;
+
+    label{
+        font-size: 16px;
+        margin-left: 10px;
+    }
+    #setPreBut{
+        margin-top: 100px
+    }
+}

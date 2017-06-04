@@ -9,9 +9,9 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
             templateUrl:'client/frontend/build/html/index.html',
             controller:'indexController'
         }).
-        when('/up',{
-            templateUrl:'client/frontend/build/html/up.html',
-            controller:'upController'
+        when('/preference',{
+            templateUrl:'client/frontend/build/html/preference.html',
+            controller:'preController'
         }).
         when('/:type',{
             templateUrl:'client/frontend/build/html/type.html',
@@ -43,15 +43,23 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
     };
 })
 .run(['$rootScope','$http','loginOut',function($rootScope,$http,loginOut){
-    $rootScope.loginOut=loginOut.loginOut;
-    $http({
-        method:'get',
-        url:'client/backend/php/loginOut.php',
-        params:{'user_name':$.cookie('user_name')},
-    }).success(function(data){
-    }).error(function(data){
-    });
+    $rootScope.loginOut=function(){
+        loginOut.loginOut();
+        $http({
+            method:'get',
+            url:'client/backend/php/loginOut.php',
+            params:{'user_name':$.cookie('user_name')},
+        }).success(function(data){
+        }).error(function(data){
+        });
+    }; 
+    
 }]);
+// .run(['$rootScope','$http',function($rootScope,$http){
+//     $rootScope.setPre=function(){
+
+//     }
+// }]);
 /**
  * Created by achao_zju on 2017/4/17.
  */
@@ -137,8 +145,8 @@ myController.controller('indexController',['$scope','$http','ifLogin',
         
 }]);
 
-myController.controller('detailController',['$scope','$http','$routeParams',
-    function($scope,$http,$routeParams){
+myController.controller('detailController',['$scope','$http','$routeParams','ifLogin',
+    function($scope,$http,$routeParams,ifLogin){
         $http({
             method:'get',
             url:'client/backend/php/getDetail.php',
@@ -153,7 +161,40 @@ myController.controller('detailController',['$scope','$http','$routeParams',
         });
 }]);
 
+myController.controller('preController',['$scope','$http','$routeParams',
+    function($scope,$http,$routeParams){
+        $scope.types=[{'name':'军事','value':"mli"},{'name':'科技',"value":"sci"},{'name':'教育',"value":'edu'},{'name':'体育',"value":'spo'},{'name':'经济',"value":"eco"}];
+        for(var index in $scope.types){
+            $scope.types[index].ifCheck=true;
+        }
+        $scope.chooseAll=function(){
+            for(var index in $scope.types){
+                $scope.types[index].ifCheck=true;
+            }  
+        };
+        $scope.notChooseAll=function(){
+            for(var index in $scope.types){
+                $scope.types[index].ifCheck=false;
+            }  
+        };
+        $scope.apply=function(){
+            var checkedTypes=[];
+            for(var index in $scope.types){
+                if($scope.types[index].ifCheck){
+                    checkedTypes.push($scope.types[index].value);
+                }
+            }
+            $http({
+                url:'client/backend/php/applyPre.php',
+                method:'post',
+                data:{'pres':checkedTypes,'user_name':$.cookie('user_name')}
+            }).success(function(){
+                
+            });
+        };
+    }
 
+]);
 $(document).ready(function(){
     $('#user_name').bind('blur',function(){ // 检查账号合法性
         var user_name=$('#user_name').val();

@@ -126,4 +126,18 @@ li > a {
   color: red;
 }
 
+/*偏好设置模块*/
+/*设置checkbox的间距*/
+#setPre {
+  margin-left: 40px;
+  margin-top: 40px;
+}
+#setPre label {
+  font-size: 16px;
+  margin-left: 10px;
+}
+#setPre #setPreBut {
+  margin-top: 100px;
+}
+
 /*# sourceMappingURL=main.css.map */

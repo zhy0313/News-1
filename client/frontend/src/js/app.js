@@ -9,9 +9,9 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
             templateUrl:'client/frontend/build/html/index.html',
             controller:'indexController'
         }).
-        when('/up',{
-            templateUrl:'client/frontend/build/html/up.html',
-            controller:'upController'
+        when('/preference',{
+            templateUrl:'client/frontend/build/html/preference.html',
+            controller:'preController'
         }).
         when('/:type',{
             templateUrl:'client/frontend/build/html/type.html',
@@ -43,12 +43,20 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
     };
 })
 .run(['$rootScope','$http','loginOut',function($rootScope,$http,loginOut){
-    $rootScope.loginOut=loginOut.loginOut;
-    $http({
-        method:'get',
-        url:'client/backend/php/loginOut.php',
-        params:{'user_name':$.cookie('user_name')},
-    }).success(function(data){
-    }).error(function(data){
-    });
+    $rootScope.loginOut=function(){
+        loginOut.loginOut();
+        $http({
+            method:'get',
+            url:'client/backend/php/loginOut.php',
+            params:{'user_name':$.cookie('user_name')},
+        }).success(function(data){
+        }).error(function(data){
+        });
+    }; 
+    
 }]);
+// .run(['$rootScope','$http',function($rootScope,$http){
+//     $rootScope.setPre=function(){
+
+//     }
+// }]);
