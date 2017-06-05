@@ -2,8 +2,8 @@
  * Created by achao_zju on 2017/4/17.
  */
 var myController=angular.module('myController',[]);
-myController.controller('mliController',['$scope','$http','$routeParams','$location','$rootScope',
-    function ($scope,$http,$routeParams,$location,$rootScope) {
+myController.controller('mliController',['$scope','$http','$routeParams','$location','$rootScope','ifLogin',
+    function ($scope,$http,$routeParams,$location,$rootScope,ifLogin) {
         $rootScope.orderProp='-time';
         $scope.type=$routeParams.type;
         $scope.count=1;
@@ -14,6 +14,9 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
                 url: 'client/backend/php/showList.php',
                 params: {'type': $scope.type,'count':$scope.count}
             }).success(function (data) {
+                if(data.ifLogin){
+                    ifLogin.keepLogin();
+                }
                 $scope.articles = data.list;
             }).error(function (data) {
                 console.log("error messgae:" + data);
@@ -40,8 +43,9 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
         };
 }]);
 
-myController.controller('indexController',['$scope','$http',
-    function ($scope,$http) {
+myController.controller('indexController',['$scope','$http','ifLogin','$location',
+    function ($scope,$http,ifLogin,$location) {
+        ifLogin.keepLogin();
         $http({
             method: 'get',
             url:'client/backend/php/showHot.php'
@@ -52,43 +56,76 @@ myController.controller('indexController',['$scope','$http',
                     case 'mli':$scope.hots[index].typeCn='军事新闻';break;
                     case 'edu':$scope.hots[index].typeCn='教育新闻';break;
                     case 'sci':$scope.hots[index].typeCn='科技新闻';break;
-                    case 'gam':$scope.hots[index].typeCn='游戏新闻';break;
-                    case 'ent':$scope.hots[index].typeCn='娱乐新闻';break;
+                    case 'eco':$scope.hots[index].typeCn='经济新闻';break;
+                    case 'spo':$scope.hots[index].typeCn='体育新闻';break;
                     default:$scope.hots[index].typeCn='其他新闻';break;
                 }
             });
-            $scope.mlis=data.mlis;
-            $scope.scis=data.scis;
-            $scope.edus=data.edus;
-            $scope.gams=data.gams;
-            $scope.ents=data.ents;
+            data.mlis.name='军事';
+            data.scis.name='科技';
+            data.edus.name='教育';
+            data.spos.name='体育';
+            data.ecos.name='经济';
+
+            $scope.types=[];
+            $scope.types.push(data.mlis,data.scis,data.edus,data.spos,data.ecos,data.hots);
+
         }).error(function (data) {
             console.log("error messgae:" + data);
         });
-        $scope.getDetail=function (item) {
-            $http({
-                method:'get',
-                url:'client/backend/php/count.php',
-                params:{'id':item.id,'type':item.type}
-            }).success(function (data) {
-                item.count++;
-            }).error(function (data) {
-                console.log("error messgae:" + data);
-            });
+        $scope.getDetail=function (item,type) {
+           $location.path(type+"/"+item.id);
         };
         
 }]);
 
-myController.controller('detailController',['$scope','$http','$routeParams',
-    function($scope,$http,$routeParams){
+myController.controller('detailController',['$scope','$http','$routeParams','ifLogin',
+    function($scope,$http,$routeParams,ifLogin){
         $http({
             method:'get',
             url:'client/backend/php/getDetail.php',
             params:{'id':$routeParams.id,'type':$routeParams.type}
         }).success(function (data) {
-            $scope.news=data;        
+            if(data.ifLogin){
+                ifLogin.keepLogin();
+            }
+            $scope.news=data;
         }).error(function (data) {
             console.log("error messgae:" + data);
         });
 }]);
 
+myController.controller('preController',['$scope','$http','$routeParams',
+    function($scope,$http,$routeParams){
+        $scope.types=[{'name':'军事','value':"mli"},{'name':'科技',"value":"sci"},{'name':'教育',"value":'edu'},{'name':'体育',"value":'spo'},{'name':'经济',"value":"eco"}];
+        for(var index in $scope.types){
+            $scope.types[index].ifCheck=true;
+        }
+        $scope.chooseAll=function(){
+            for(var index in $scope.types){
+                $scope.types[index].ifCheck=true;
+            }  
+        };
+        $scope.notChooseAll=function(){
+            for(var index in $scope.types){
+                $scope.types[index].ifCheck=false;
+            }  
+        };
+        $scope.apply=function(){
+            var checkedTypes=[];
+            for(var index in $scope.types){
+                if($scope.types[index].ifCheck){
+                    checkedTypes.push($scope.types[index].value);
+                }
+            }
+            $http({
+                url:'client/backend/php/applyPre.php',
+                method:'post',
+                data:{'pres':checkedTypes,'user_name':$.cookie('user_name')}
+            }).success(function(){
+                
+            });
+        };
+    }
+
+]);

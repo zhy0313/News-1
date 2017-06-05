@@ -11,9 +11,7 @@
     <script src="bower_components/bower-angularjs/angular-sanitize.min.js"></script>
 
 </head>
-
 <body ng-app="myApp">
-
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -29,9 +27,9 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="#mli">军事<span class="sr-only">(current)</span></a></li>
-                <li><a href="#ent">娱乐</a></li>
+                <li><a href="#eco">经济</a></li>
                 <li><a href="#sci">科技</a></li>
-                <li><a href="#gam">游戏</a></li>
+                <li><a href="#spo">体育</a></li>
                 <li><a href="#edu">教育</a></li>
             </ul>
             <form class="navbar-form navbar-left" role="search">
@@ -45,24 +43,28 @@
             </form>
 
             <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown hide">
+                        <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown</a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#preference">偏好设置</a></li>
+                          <li ng-click="loginOut()"><a>登出</a></li>                    
+                        </ul>
+                </li>
                 <li><a  data-toggle="modal" data-target="#signUp">注册</a></li>
-                <li><a href="#in">登录</a></li>
-                <li><a href="#set">设置</a></li>
+                <li><a  data-toggle="modal" data-target="#signIn">登录</a></li>
             </ul>
         </div>
     </div>
 </nav>
 <!-- Button trigger modal -->
 
-
-<!-- Modal -->
-
+<!-- Modal  for 注册-->
 <div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">请输入注册邮箱</h4>
+        <h4 class="modal-title" id="myModalLabel">注册账号</h4>
       </div>
       <div class="modal-body">
         <div class="form-group">
@@ -75,13 +77,37 @@
           <input class="form-control"  type="email" placeholder="邮箱:只支持.com域名的邮箱">
           <p class="warn-info"></p>
         </div>
-
-
       </div>
       <div class="modal-footer">
           <div class="form-group">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button id="sendCode" type="button" class="btn btn-primary">发送验证码</button>
+            <span class="warn-info left"></span>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary">注册</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="signIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">登录</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input class="form-control" placeholder="邮箱">
+          <p class="warn-info"></p>
+          <input class="form-control"  type="password" placeholder="密码">
+          <p class="warn-info"></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <div class="form-group">
+            <span class="warn-info"></span>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary">登录</button>
           </div>
       </div>
     </div>
@@ -89,8 +115,9 @@
 </div>
 <ng-view></ng-view>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
     <!--app.js+controller.js+index.js//index.js依赖jQuery-->
-     <script src="client/frontend/build/js/global.min.js"></script>
+    <script src="client/frontend/build/js/global.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

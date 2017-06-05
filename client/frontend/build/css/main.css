@@ -113,11 +113,31 @@ li > a {
   margin: 0 auto;
 }
 
+#signUp {
+  position: fixed;
+  top: 60px;
+}
 #signUp input {
   margin-bottom: 10px;
 }
-#signUp .warn-info {
+
+/*一些全局通用样式*/
+.warn-info {
   color: red;
+}
+
+/*偏好设置模块*/
+/*设置checkbox的间距*/
+#setPre {
+  margin-left: 40px;
+  margin-top: 40px;
+}
+#setPre label {
+  font-size: 16px;
+  margin-left: 10px;
+}
+#setPre #setPreBut {
+  margin-top: 100px;
 }
 
 /*# sourceMappingURL=main.css.map */

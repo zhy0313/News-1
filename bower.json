@@ -22,6 +22,7 @@
   "dependencies": {
     "bootswatch": "https://github.com/thomaspark/bootswatch.git#^3.3.7",
     "bower-angularjs": "angular.js#^1.3.15",
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "jquery.cookie": "jquery-cookie#^1.4.1"
   }
 }
