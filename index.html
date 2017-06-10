@@ -26,11 +26,11 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#mli">军事<span class="sr-only">(current)</span></a></li>
-                <li><a href="#eco">经济</a></li>
-                <li><a href="#sci">科技</a></li>
-                <li><a href="#spo">体育</a></li>
-                <li><a href="#edu">教育</a></li>
+                <li><a href="#mli" ng-if="ifMli">军事<span class="sr-only">(current)</span></a></li>
+                <li><a href="#eco" ng-if="ifEco">经济</a></li>
+                <li><a href="#sci" ng-if="ifSci">科技</a></li>
+                <li><a href="#spo" ng-if="ifSpo">体育</a></li>
+                <li><a href="#edu" ng-if="ifEdu">教育</a></li>
             </ul>
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">

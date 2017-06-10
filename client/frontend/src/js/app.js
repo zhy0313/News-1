@@ -54,9 +54,43 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
         });
     }; 
     
-}]);
-// .run(['$rootScope','$http',function($rootScope,$http){
-//     $rootScope.setPre=function(){
+}])
+.run(['$rootScope','$http',function($rootScope,$http){    
+    $rootScope.ifSci=$rootScope.ifEco=$rootScope.ifEdu=$rootScope.ifSpo=$rootScope.ifMli=true;
+    $http({
+        method:"get",
+        url:'client/backend/php/getPre.php',
+        params:{'user_name':$.cookie('user_name')}
+    }).success(function(data){
+        if(data.code===0){
+            if(data.data.indexOf('sci')>=0){
+                    $rootScope.ifSci=true;
+                }else{
+                    $rootScope.ifSci=false;
+                }
+                if(data.data.indexOf('eco')>=0){
+                    $rootScope.ifEco=true;
+                }else{
+                    $rootScope.ifEco=false;
+                }
+                if(data.data.indexOf('edu')>=0){
+                    $rootScope.ifEdu=true;
+                }else{
+                    $rootScope.ifEdu=false;
+                }
+                if(data.data.indexOf('spo')>=0){
+                    $rootScope.ifSpo=true;
+                }else{
+                    $rootScope.ifSpo=false;
+                }
+                if(data.data.indexOf('mli')>=0){
+                    $rootScope.ifMli=true;
+                }else{
+                    $rootScope.ifMli=false;
+            }
+        }else if(data.code===1){
 
-//     }
-// }]);
+        }
+    }).error(function(data){
+    });   
+}]);

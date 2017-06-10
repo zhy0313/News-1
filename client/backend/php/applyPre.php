@@ -17,11 +17,12 @@ foreach($types as $type){
 if(!$result){ $code=2;$msg=mysql_error();}
 else{
     $code=0;$msg="成功设置偏好";
+    $data=$postdata;
 }
 $res=array(
     'code'=>$code,
     'msg'=>$msg,
-    'data'=>$num
+    'data'=>$data
 );
 echo json_encode($res, JSON_UNESCAPED_UNICODE);
 $conn->close();

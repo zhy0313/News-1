@@ -54,12 +54,46 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
         });
     }; 
     
-}]);
-// .run(['$rootScope','$http',function($rootScope,$http){
-//     $rootScope.setPre=function(){
+}])
+.run(['$rootScope','$http',function($rootScope,$http){    
+    $rootScope.ifSci=$rootScope.ifEco=$rootScope.ifEdu=$rootScope.ifSpo=$rootScope.ifMli=true;
+    $http({
+        method:"get",
+        url:'client/backend/php/getPre.php',
+        params:{'user_name':$.cookie('user_name')}
+    }).success(function(data){
+        if(data.code===0){
+            if(data.data.indexOf('sci')>=0){
+                    $rootScope.ifSci=true;
+                }else{
+                    $rootScope.ifSci=false;
+                }
+                if(data.data.indexOf('eco')>=0){
+                    $rootScope.ifEco=true;
+                }else{
+                    $rootScope.ifEco=false;
+                }
+                if(data.data.indexOf('edu')>=0){
+                    $rootScope.ifEdu=true;
+                }else{
+                    $rootScope.ifEdu=false;
+                }
+                if(data.data.indexOf('spo')>=0){
+                    $rootScope.ifSpo=true;
+                }else{
+                    $rootScope.ifSpo=false;
+                }
+                if(data.data.indexOf('mli')>=0){
+                    $rootScope.ifMli=true;
+                }else{
+                    $rootScope.ifMli=false;
+            }
+        }else if(data.code===1){
 
-//     }
-// }]);
+        }
+    }).error(function(data){
+    });   
+}]);
 /**
  * Created by achao_zju on 2017/4/17.
  */
@@ -107,11 +141,13 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
 
 myController.controller('indexController',['$scope','$http','ifLogin','$location',
     function ($scope,$http,ifLogin,$location) {
-        ifLogin.keepLogin();
         $http({
             method: 'get',
             url:'client/backend/php/showHot.php'
         }).success(function (data) {
+            if(data.ifLogin){
+                ifLogin.keepLogin();
+            }
             $scope.hots=data.hots;
             $scope.hots.forEach(function (val,index,arr) {
                 switch($scope.hots[index].type){
@@ -130,7 +166,7 @@ myController.controller('indexController',['$scope','$http','ifLogin','$location
             data.ecos.name='经济';
 
             $scope.types=[];
-            $scope.types.push(data.mlis,data.scis,data.edus,data.spos,data.ecos,data.hots);
+            $scope.types.push(data.mlis,data.scis,data.edus,data.spos,data.ecos);
 
         }).error(function (data) {
             console.log("error messgae:" + data);
@@ -157,8 +193,8 @@ myController.controller('detailController',['$scope','$http','$routeParams','ifL
         });
 }]);
 
-myController.controller('preController',['$scope','$http','$routeParams',
-    function($scope,$http,$routeParams){
+myController.controller('preController',['$scope','$http','$routeParams','$rootScope',
+    function($scope,$http,$routeParams,$rootScope){
         $scope.types=[{'name':'军事','value':"mli"},{'name':'科技',"value":"sci"},{'name':'教育',"value":'edu'},{'name':'体育',"value":'spo'},{'name':'经济',"value":"eco"}];
         for(var index in $scope.types){
             $scope.types[index].ifCheck=true;
@@ -184,8 +220,32 @@ myController.controller('preController',['$scope','$http','$routeParams',
                 url:'client/backend/php/applyPre.php',
                 method:'post',
                 data:{'pres':checkedTypes,'user_name':$.cookie('user_name')}
-            }).success(function(){
-                
+            }).success(function(data){
+                if(data.data.indexOf('sci')>=0){
+                    $rootScope.ifSci=true;
+                }else{
+                    $rootScope.ifSci=false;
+                }
+                if(data.data.indexOf('eco')>=0){
+                    $rootScope.ifEco=true;
+                }else{
+                    $rootScope.ifEco=false;
+                }
+                if(data.data.indexOf('edu')>=0){
+                    $rootScope.ifEdu=true;
+                }else{
+                    $rootScope.ifEdu=false;
+                }
+                if(data.data.indexOf('spo')>=0){
+                    $rootScope.ifSpo=true;
+                }else{
+                    $rootScope.ifSpo=false;
+                }
+                if(data.data.indexOf('mli')>=0){
+                    $rootScope.ifMli=true;
+                }else{
+                    $rootScope.ifMli=false;
+                }
             });
         };
     }
