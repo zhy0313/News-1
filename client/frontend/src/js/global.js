@@ -166,7 +166,7 @@ myController.controller('indexController',['$scope','$http','ifLogin','$location
             data.ecos.name='经济';
 
             $scope.types=[];
-            $scope.types.push(data.mlis,data.scis,data.edus,data.spos,data.ecos,data.hots);
+            $scope.types.push(data.mlis,data.scis,data.edus,data.spos,data.ecos);
 
         }).error(function (data) {
             console.log("error messgae:" + data);
