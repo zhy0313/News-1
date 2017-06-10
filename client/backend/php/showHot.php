@@ -42,7 +42,11 @@ foreach ($types as $type){
 }
 array_multisort($sort,SORT_DESC,$hots);
 $arr['hots']=$hots;
-$arr['ifLogin']=$_SESSION['ifLigin'];
+if($_SESSION['ifLogin']){
+    $arr['ifLogin']=$_SESSION['ifLogin'];
+}else{
+    $arr['ifLogin']=false;
+}
 echo json_encode($arr, JSON_UNESCAPED_UNICODE);
 $conn->close();
 ?>

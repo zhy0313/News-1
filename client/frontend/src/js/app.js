@@ -55,14 +55,15 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
     }; 
     
 }])
-.run(['$rootScope','$http',function($rootScope,$http){
+.run(['$rootScope','$http',function($rootScope,$http){    
+    $rootScope.ifSci=$rootScope.ifEco=$rootScope.ifEdu=$rootScope.ifSpo=$rootScope.ifMli=true;
     $http({
         method:"get",
         url:'client/backend/php/getPre.php',
         params:{'user_name':$.cookie('user_name')}
     }).success(function(data){
         if(data.code===0){
-             if(data.data.indexOf('sci')>=0){
+            if(data.data.indexOf('sci')>=0){
                     $rootScope.ifSci=true;
                 }else{
                     $rootScope.ifSci=false;
@@ -87,7 +88,9 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
                 }else{
                     $rootScope.ifMli=false;
             }
+        }else if(data.code===1){
+
         }
     }).error(function(data){
-    });
+    });   
 }]);

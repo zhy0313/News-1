@@ -55,14 +55,15 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
     }; 
     
 }])
-.run(['$rootScope','$http',function($rootScope,$http){
+.run(['$rootScope','$http',function($rootScope,$http){    
+    $rootScope.ifSci=$rootScope.ifEco=$rootScope.ifEdu=$rootScope.ifSpo=$rootScope.ifMli=true;
     $http({
         method:"get",
         url:'client/backend/php/getPre.php',
         params:{'user_name':$.cookie('user_name')}
     }).success(function(data){
         if(data.code===0){
-             if(data.data.indexOf('sci')>=0){
+            if(data.data.indexOf('sci')>=0){
                     $rootScope.ifSci=true;
                 }else{
                     $rootScope.ifSci=false;
@@ -87,9 +88,11 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
                 }else{
                     $rootScope.ifMli=false;
             }
+        }else if(data.code===1){
+
         }
     }).error(function(data){
-    });
+    });   
 }]);
 /**
  * Created by achao_zju on 2017/4/17.
@@ -138,11 +141,13 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
 
 myController.controller('indexController',['$scope','$http','ifLogin','$location',
     function ($scope,$http,ifLogin,$location) {
-        ifLogin.keepLogin();
         $http({
             method: 'get',
             url:'client/backend/php/showHot.php'
         }).success(function (data) {
+            if(data.ifLogin){
+                ifLogin.keepLogin();
+            }
             $scope.hots=data.hots;
             $scope.hots.forEach(function (val,index,arr) {
                 switch($scope.hots[index].type){
@@ -216,7 +221,6 @@ myController.controller('preController',['$scope','$http','$routeParams','$rootS
                 method:'post',
                 data:{'pres':checkedTypes,'user_name':$.cookie('user_name')}
             }).success(function(data){
-                console.log(data);
                 if(data.data.indexOf('sci')>=0){
                     $rootScope.ifSci=true;
                 }else{

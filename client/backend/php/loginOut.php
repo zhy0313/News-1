@@ -2,7 +2,7 @@
 include 'connect.php';
 error_reporting(E_ERROR|E_WARNING);
 session_start();
-session_destroy();
+$_SESSION = array();
 $code=0;
 $res=array(
     'code'=>$code,
