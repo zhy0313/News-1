@@ -11,7 +11,7 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
         if($scope.type!==undefined) {
             $http({
                 method: 'get',
-                url: 'client/backend/php/showList.php',
+                url: 'backend/php/showList.php',
                 params: {'type': $scope.type,'count':$scope.count}
             }).success(function (data) {
                 if(data.ifLogin){
@@ -25,7 +25,7 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
         $scope.getNext=function(){
             $http({
                 method:'get',
-                url:'client/backend/php/showList.php',
+                url:'backend/php/showList.php',
                 params: {'type': $scope.type,'count':$scope.count+1}
             }).success(function(data){
                 $scope.articles=$scope.articles.concat(data.list);
@@ -47,7 +47,7 @@ myController.controller('indexController',['$scope','$http','ifLogin','$location
     function ($scope,$http,ifLogin,$location) {
         $http({
             method: 'get',
-            url:'client/backend/php/showHot.php'
+            url:'backend/php/showHot.php'
         }).success(function (data) {
             if(data.ifLogin){
                 ifLogin.keepLogin();
@@ -85,7 +85,7 @@ myController.controller('detailController',['$scope','$http','$routeParams','ifL
     function($scope,$http,$routeParams,ifLogin){
         $http({
             method:'get',
-            url:'client/backend/php/getDetail.php',
+            url:'backend/php/getDetail.php',
             params:{'id':$routeParams.id,'type':$routeParams.type}
         }).success(function (data) {
             if(data.ifLogin){
@@ -121,7 +121,7 @@ myController.controller('preController',['$scope','$http','$routeParams','$rootS
                 }
             }
             $http({
-                url:'client/backend/php/applyPre.php',
+                url:'backend/php/applyPre.php',
                 method:'post',
                 data:{'pres':checkedTypes,'user_name':$.cookie('user_name')}
             }).success(function(data){

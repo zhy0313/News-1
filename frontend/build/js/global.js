@@ -6,19 +6,19 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
     function ($routeProvider) {
         $routeProvider.
         when('/index',{
-            templateUrl:'client/frontend/build/html/index.html',
+            templateUrl:'frontend/build/html/index.html',
             controller:'indexController'
         }).       
         when('/preference',{
-            templateUrl:'client/frontend/build/html/preference.html',
+            templateUrl:'frontend/build/html/preference.html',
             controller:'preController'
         }).
         when('/:type',{
-            templateUrl:'client/frontend/build/html/type.html',
+            templateUrl:'frontend/build/html/type.html',
             controller:'mliController'
         }).
         when('/:type/:id',{
-            templateUrl:'client/frontend/build/html/detail.html',
+            templateUrl:'frontend/build/html/detail.html',
             controller:'detailController'
         }).
         otherwise({
@@ -47,7 +47,7 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
         loginOut.loginOut();
         $http({
             method:'get',
-            url:'client/backend/php/loginOut.php',
+            url:'backend/php/loginOut.php',
             params:{'user_name':$.cookie('user_name')},
         }).success(function(data){
         }).error(function(data){
@@ -59,7 +59,7 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
     $rootScope.ifSci=$rootScope.ifEco=$rootScope.ifEdu=$rootScope.ifSpo=$rootScope.ifMli=true;
     $http({
         method:"get",
-        url:'client/backend/php/getPre.php',
+        url:'backend/php/getPre.php',
         params:{'user_name':$.cookie('user_name')}
     }).success(function(data){
         if(data.code===0){
@@ -107,7 +107,7 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
         if($scope.type!==undefined) {
             $http({
                 method: 'get',
-                url: 'client/backend/php/showList.php',
+                url: 'backend/php/showList.php',
                 params: {'type': $scope.type,'count':$scope.count}
             }).success(function (data) {
                 if(data.ifLogin){
@@ -121,7 +121,7 @@ myController.controller('mliController',['$scope','$http','$routeParams','$locat
         $scope.getNext=function(){
             $http({
                 method:'get',
-                url:'client/backend/php/showList.php',
+                url:'backend/php/showList.php',
                 params: {'type': $scope.type,'count':$scope.count+1}
             }).success(function(data){
                 $scope.articles=$scope.articles.concat(data.list);
@@ -143,7 +143,7 @@ myController.controller('indexController',['$scope','$http','ifLogin','$location
     function ($scope,$http,ifLogin,$location) {
         $http({
             method: 'get',
-            url:'client/backend/php/showHot.php'
+            url:'backend/php/showHot.php'
         }).success(function (data) {
             if(data.ifLogin){
                 ifLogin.keepLogin();
@@ -181,7 +181,7 @@ myController.controller('detailController',['$scope','$http','$routeParams','ifL
     function($scope,$http,$routeParams,ifLogin){
         $http({
             method:'get',
-            url:'client/backend/php/getDetail.php',
+            url:'backend/php/getDetail.php',
             params:{'id':$routeParams.id,'type':$routeParams.type}
         }).success(function (data) {
             if(data.ifLogin){
@@ -217,7 +217,7 @@ myController.controller('preController',['$scope','$http','$routeParams','$rootS
                 }
             }
             $http({
-                url:'client/backend/php/applyPre.php',
+                url:'backend/php/applyPre.php',
                 method:'post',
                 data:{'pres':checkedTypes,'user_name':$.cookie('user_name')}
             }).success(function(data){
@@ -259,7 +259,7 @@ $(document).ready(function(){
              return;
         }
         $.ajax({
-            url:"client/backend/php/checkUserName.php?user_name="+user_name,
+            url:"backend/php/checkUserName.php?user_name="+user_name,
             method:"get",
             success:function(data){
                 if(data.num>0){
@@ -296,7 +296,7 @@ $(document).ready(function(){
             $('.warn-info:eq(3)').text('');
         }
         $.ajax({
-            url:"client/backend/php/checkEmail.php?email="+email,
+            url:"backend/php/checkEmail.php?email="+email,
             method:"get",
             success:function(data){
                 if(data.num>0){
@@ -329,7 +329,7 @@ $(document).ready(function(){
         }
         
         $.ajax({
-            url:"client/backend/php/up.php",
+            url:"backend/php/up.php",
             method:"post",
             datatype:JSON,
             data:{user_name:user_name,password:password,email:email},
@@ -375,7 +375,7 @@ $(document).ready(function(){
             $('#signIn .modal-footer .warn-info').text('');
         }
         $.ajax({
-            url:"client/backend/php/in.php",
+            url:"backend/php/in.php",
             method:"post",
             datatype:JSON,
             data:{password:password,email:email},

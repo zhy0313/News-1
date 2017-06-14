@@ -3,12 +3,14 @@ module.exports=function(grunt){
         pkg:grunt.file.readJSON('package.json'),
         sass:{
             output:{
-                options:{
-                    style:"expanded"
-                },
-                files:{
-                    'client/frontend/build/css/main.css':"client/frontend/src/css/main.scss"
-                }
+                files:[{
+                    expand:true,
+                    cwd:'frontend/src',
+                    src:'**/main.scss',
+                    dest:'frontend/build',
+                    ext:'.css'
+                }]
+
             }
         },
         concat:{
@@ -16,14 +18,14 @@ module.exports=function(grunt){
                 //
             },
             dist:{
-                src:['client/frontend/src/js/app.js','client/frontend/src/js/controller.js','client/frontend/src/js/index.js'],
-                dest:'client/frontend/src/js/global.js'
+                src:['frontend/src/js/*'],
+                dest:'frontend/build/js/global.js'
             }
         },
         uglify:{
             compressjs:{
                 files:{
-                    'client/frontend/build/js/global.min.js':['client/frontend/src/js/global.js']
+                    'frontend/build/js/global.min.js':['frontend/build/js/global.js']
                 }
             }
         },
@@ -32,12 +34,12 @@ module.exports=function(grunt){
             // stripBanners:true,
             },
             build:{
-                src:'client/frontend/build/css/main.css',
-                dest:'client/frontend/build/css/main.min.css'
+                src:'frontend/build/css/main.css',
+                dest:'frontend/build/css/main.min.css'
             }
         },
         jshint:{
-            all:['client/frontend/src/js/global.js']
+            all:['frontend/build/js/global.js']
         },
         htmlmin:{
             options:{
@@ -53,15 +55,15 @@ module.exports=function(grunt){
             html:{
                 files:[{
                     expand:true,
-                    cwd:'client/frontend/src/html',
+                    cwd:'frontend/src/html',
                     src:['*.html'],
-                    dest:'client/frontend/build/html'
+                    dest:'frontend/build/html'
                 }]
             }
         },
         watch:{
             scripts:{
-                files:['client/frontend/src/html/*.html','client/frontend/src/js/*.js','client/frontend/src/css/main.scss'],
+                files:['frontend/src/html/*.html','frontend/src/js/*.js','frontend/src/css/main.scss'],
                 tasks:['sass','htmlmin','cssmin','concat','jshint','uglify']
             },
             livereload:{
@@ -69,16 +71,16 @@ module.exports=function(grunt){
                     livereload:'<%=connect.options.livereload %>'
                 },
                 files:[
-                    'client/frontend/build/js/global.min.js',
-                    'client/frontend/build/css/main.min.css',
-                    'client/frontend/build/html/*'
+                    'frontend/build/js/global.min.js',
+                    'frontend/build/css/main.min.css',
+                    'frontend/build/html/*'
 
                 ]
             }
         },
         connect:{
             options:{
-                port:9000,
+                port:9001,
                 open:true,
                 livereload:35729,
                 hostname:'localhost'

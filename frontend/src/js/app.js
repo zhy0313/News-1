@@ -6,19 +6,19 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
     function ($routeProvider) {
         $routeProvider.
         when('/index',{
-            templateUrl:'client/frontend/build/html/index.html',
+            templateUrl:'frontend/build/html/index.html',
             controller:'indexController'
         }).       
         when('/preference',{
-            templateUrl:'client/frontend/build/html/preference.html',
+            templateUrl:'frontend/build/html/preference.html',
             controller:'preController'
         }).
         when('/:type',{
-            templateUrl:'client/frontend/build/html/type.html',
+            templateUrl:'frontend/build/html/type.html',
             controller:'mliController'
         }).
         when('/:type/:id',{
-            templateUrl:'client/frontend/build/html/detail.html',
+            templateUrl:'frontend/build/html/detail.html',
             controller:'detailController'
         }).
         otherwise({
@@ -47,7 +47,7 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
         loginOut.loginOut();
         $http({
             method:'get',
-            url:'client/backend/php/loginOut.php',
+            url:'backend/php/loginOut.php',
             params:{'user_name':$.cookie('user_name')},
         }).success(function(data){
         }).error(function(data){
@@ -59,7 +59,7 @@ angular.module('myApp',['ngRoute','myController','ngSanitize'])
     $rootScope.ifSci=$rootScope.ifEco=$rootScope.ifEdu=$rootScope.ifSpo=$rootScope.ifMli=true;
     $http({
         method:"get",
-        url:'client/backend/php/getPre.php',
+        url:'backend/php/getPre.php',
         params:{'user_name':$.cookie('user_name')}
     }).success(function(data){
         if(data.code===0){

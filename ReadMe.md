@@ -33,7 +33,7 @@ $ npm install
 -  其他
 
   ```
-  client/backend/py/search.py是爬虫代码，必须在pyspider框架下执行
+  backend/py/search.py是爬虫代码，必须在pyspider框架下执行
   ```
 
   更多关于pyspider的介绍详见：

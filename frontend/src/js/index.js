@@ -6,7 +6,7 @@ $(document).ready(function(){
              return;
         }
         $.ajax({
-            url:"client/backend/php/checkUserName.php?user_name="+user_name,
+            url:"backend/php/checkUserName.php?user_name="+user_name,
             method:"get",
             success:function(data){
                 if(data.num>0){
@@ -43,7 +43,7 @@ $(document).ready(function(){
             $('.warn-info:eq(3)').text('');
         }
         $.ajax({
-            url:"client/backend/php/checkEmail.php?email="+email,
+            url:"backend/php/checkEmail.php?email="+email,
             method:"get",
             success:function(data){
                 if(data.num>0){
@@ -76,7 +76,7 @@ $(document).ready(function(){
         }
         
         $.ajax({
-            url:"client/backend/php/up.php",
+            url:"backend/php/up.php",
             method:"post",
             datatype:JSON,
             data:{user_name:user_name,password:password,email:email},
@@ -122,7 +122,7 @@ $(document).ready(function(){
             $('#signIn .modal-footer .warn-info').text('');
         }
         $.ajax({
-            url:"client/backend/php/in.php",
+            url:"backend/php/in.php",
             method:"post",
             datatype:JSON,
             data:{password:password,email:email},
