@@ -1,12 +1,18 @@
 - 这是一个新闻聚合app
 - 除去配置代码和第三方库和框架代码，有效代码900+
-#### usage 
+### doc
+
+[使用手册](doc/受用手册[必读].md "Title") 
+
+
+
+### usage 
 ```
 $ bower install
 $ npm install
 ```
 
-#### 代码部署
+### 代码部署
 
 |—bower_components//第三方库和代码
 
